@@ -1,9 +1,13 @@
 {
+  "private": true,
   "name": "changesets-playground",
   "version": "1.0.0",
   "description": "changesets playground",
   "main": "index.js",
   "scripts": {
+    "prepare": "npx changeset init",
+    "add-changelog": "changeset add",
+    "release": "changeset version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/kokoe/changesets-playground/issues"
   },
-  "homepage": "https://github.com/kokoe/changesets-playground#readme"
+  "homepage": "https://github.com/kokoe/changesets-playground#readme",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1"
+  }
 }
