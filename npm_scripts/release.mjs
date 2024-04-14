@@ -1,24 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { exec } from "child_process";
-
-function execWithPromise(command, stepName) {
-  return new Promise((resolve, reject) => {
-    exec(command, (err, stdout, stderr) => {
-      if (err) {
-        console.error(`${stepName} error: ${err.message}`);
-        reject(err);
-        return;
-      } else if (stderr) {
-        console.error(`${stepName} stderr: ${stderr}`);
-        reject(stderr);
-        return;
-      }
-      console.log(`${stepName} stdout: ${stdout}`);
-      resolve(stdout);
-    });
-  });
-}
+import { execSync } from "child_process";
 
 /**
  * ---
@@ -58,13 +40,9 @@ function getVersionFromChangeset() {
   return version || "patch";
 }
 
-async function execNpmVersion(version) {
+function execNpmVersion(version) {
   console.log("## execNpmVersion. version", version);
-
-  await execWithPromise(
-    `pnpm version ${version} --no-commit-hooks --no-git-tag-version`,
-    "execNpmVersion"
-  );
+  execSync(`pnpm version ${version} --no-commit-hooks --no-git-tag-version`);
 }
 
 function getNextVersionNo() {
@@ -75,16 +53,15 @@ function getNextVersionNo() {
   return packageJson.version;
 }
 
-async function revertPackageJson() {
+function revertPackageJson() {
   console.log("## revertPackageJson");
-  await execWithPromise("git checkout package.json", "revertPackageJson");
+  execSync("git checkout package.json");
 }
 
-async function execCreateReleaseBranch(nextVersionNo) {
+function execCreateReleaseBranch(nextVersionNo) {
   console.log(`## execCreateReleaseBranch. nextVersionNo: ${nextVersionNo}`);
-  await execWithPromise(
-    `git checkout -b release/v${nextVersionNo} && git push --set-upstream origin release/v${nextVersionNo}`,
-    "execCreateReleaseBranch"
+  execSync(
+    `git checkout -b release/v${nextVersionNo} && git push --set-upstream origin release/v${nextVersionNo}`
   );
 }
 
