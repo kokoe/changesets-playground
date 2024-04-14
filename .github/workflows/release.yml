@@ -49,6 +49,6 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm release
-          createGithubReleases: true
+          createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
