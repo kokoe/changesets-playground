@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "changesets-playground",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "changesets playground",
   "main": "index.js",
   "scripts": {
