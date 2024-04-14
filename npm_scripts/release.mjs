@@ -28,6 +28,7 @@ function execCallback(stepName) {
  * の優先度で、最初に見つかったものを返す
  */
 function getVersionFromChangeset() {
+  console.log("## getVersionFromChangeset");
   const order = ["major", "minor", "patch"];
 
   const dir = path.join(process.cwd(), ".changeset");
@@ -53,7 +54,7 @@ function getVersionFromChangeset() {
 }
 
 function execNpmVersion(version) {
-  console.log(`## version: ${version}`);
+  console.log("## execNpmVersion. version", version);
   exec(
     `pnpm version ${version} --no-commit-hooks --no-git-tag-version`,
     execCallback("execNpmVersion")
@@ -61,6 +62,7 @@ function execNpmVersion(version) {
 }
 
 function getNextVersionNo() {
+  console.log("## getNextVersionNo");
   const packageJson = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8")
   );
@@ -68,11 +70,12 @@ function getNextVersionNo() {
 }
 
 function revertPackageJson() {
+  console.log("## revertPackageJson");
   exec("git checkout package.json", execCallback("revertPackageJson"));
 }
 
 function execCreateReleaseBranch(nextVersionNo) {
-  console.log(`## nextVersionNo: ${nextVersionNo}`);
+  console.log(`## execCreateReleaseBranch. nextVersionNo: ${nextVersionNo}`);
   exec(
     `git checkout -b release/v${nextVersionNo} && git push --set-upstream origin release/v${nextVersionNo}`,
     execCallback("execCreateReleaseBranch")
