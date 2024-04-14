@@ -83,5 +83,5 @@ const version = getVersionFromChangeset();
 execNpmVersion(version);
 
 const nextVersionNo = getNextVersionNo();
-// revertPackageJson();
+revertPackageJson();
 execCreateReleaseBranch(nextVersionNo);
