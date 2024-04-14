@@ -1,5 +1,11 @@
 # changesets-playground
 
+## 1.0.3
+
+### Patch Changes
+
+- [#5](https://github.com/kokoe/changesets-playground/pull/5) [`9c792dd`](https://github.com/kokoe/changesets-playground/commit/9c792ddc216ddd0be859dff4507dbbcafeedc609) Thanks [@kokoe](https://github.com/kokoe)! - changelog test
+
 ## 1.0.2
 
 ### Patch Changes
