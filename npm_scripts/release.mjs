@@ -2,17 +2,22 @@ import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
 
-function execCallback(stepName) {
-  return (err, stdout, stderr) => {
-    if (err) {
-      console.error(`${stepName} Error: ${err.message}`);
-      return;
-    } else if (stderr) {
-      console.error(`${stepName} stderr: ${stderr}`);
-      return;
-    }
-    console.log(`${stepName} stdout: ${stdout}`);
-  };
+function execWithPromise(command, stepName) {
+  return new Promise((resolve, reject) => {
+    exec(command, (err, stdout, stderr) => {
+      if (err) {
+        console.error(`${stepName} error: ${err.message}`);
+        reject(err);
+        return;
+      } else if (stderr) {
+        console.error(`${stepName} stderr: ${stderr}`);
+        reject(stderr);
+        return;
+      }
+      console.log(`${stepName} stdout: ${stdout}`);
+      resolve(stdout);
+    });
+  });
 }
 
 /**
@@ -53,11 +58,12 @@ function getVersionFromChangeset() {
   return version || "patch";
 }
 
-function execNpmVersion(version) {
+async function execNpmVersion(version) {
   console.log("## execNpmVersion. version", version);
-  exec(
+
+  await execWithPromise(
     `pnpm version ${version} --no-commit-hooks --no-git-tag-version`,
-    execCallback("execNpmVersion")
+    "execNpmVersion"
   );
 }
 
@@ -69,16 +75,16 @@ function getNextVersionNo() {
   return packageJson.version;
 }
 
-function revertPackageJson() {
+async function revertPackageJson() {
   console.log("## revertPackageJson");
-  exec("git checkout package.json", execCallback("revertPackageJson"));
+  await execWithPromise("git checkout package.json", "revertPackageJson");
 }
 
-function execCreateReleaseBranch(nextVersionNo) {
+async function execCreateReleaseBranch(nextVersionNo) {
   console.log(`## execCreateReleaseBranch. nextVersionNo: ${nextVersionNo}`);
-  exec(
+  await execWithPromise(
     `git checkout -b release/v${nextVersionNo} && git push --set-upstream origin release/v${nextVersionNo}`,
-    execCallback("execCreateReleaseBranch")
+    "execCreateReleaseBranch"
   );
 }
 
