@@ -23,4 +23,5 @@ runs:
           ${{ runner.os }}-pnpm-store-
 
     - name: Install Dependencies
+      shell: bash
       run: pnpm install
