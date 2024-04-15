@@ -1,5 +1,15 @@
 # changesets-playground
 
+## 1.0.4
+
+### Patch Changes
+
+- [`1f853fc`](https://github.com/kokoe/changesets-playground/commit/1f853fc1365fd86a3ece3ad33e4a5cd03e9cfc86) Thanks [@kokoe](https://github.com/kokoe)! - Fix: pnpm setup
+
+- [`ef7e738`](https://github.com/kokoe/changesets-playground/commit/ef7e738e2a238f340f3bccea10b0d8817ac6583c) Thanks [@kokoe](https://github.com/kokoe)! - Fix release version. If not, push
+
+- [`de4a169`](https://github.com/kokoe/changesets-playground/commit/de4a1690480e3407fa64e9ecc46d34a270bbc199) Thanks [@kokoe](https://github.com/kokoe)! - Create a release branch by npm script
+
 ## 1.0.3
 
 ### Patch Changes
