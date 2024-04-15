@@ -29,7 +29,7 @@ function getVersionFromChangeset() {
     const match = content.match(
       /changesets-playground"\s*:\s*(patch|minor|major)/
     );
-    if (match && acc.some((v) => v === match[1])) {
+    if (match && acc.some((v) => v !== match[1])) {
       acc.push(match[1]);
     }
     return acc;
