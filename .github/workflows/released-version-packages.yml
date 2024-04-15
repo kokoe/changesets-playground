@@ -47,8 +47,9 @@ jobs:
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
+        # https://github.com/changesets/action?tab=readme-ov-file#inputs
         with:
-          version: pnpm release
-          createGithubReleases: false
+          commit: Released version packages
+          title: Released version packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

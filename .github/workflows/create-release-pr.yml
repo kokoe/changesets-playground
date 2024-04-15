@@ -1,0 +1,31 @@
+name: Create PR on Push to Release
+
+on:
+  push:
+    branches:
+      - "release/*"
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Get version number from git release branch name
+      - name: Get version from branch name
+        id: get_version_from_branch
+        run: echo version=$(echo $GITHUB_REF | sed -e 's/refs\/heads\/release\///') >> $GITHUB_OUTPUT
+
+      # Create Release PR
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        # https://github.com/changesets/action?tab=readme-ov-file#inputs
+        with:
+          commit: Release v$version
+          title: Released v$version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
