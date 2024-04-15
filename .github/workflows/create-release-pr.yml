@@ -20,6 +20,9 @@ jobs:
         id: get_version_from_branch
         run: echo version=$(echo $GITHUB_REF | sed -e 's/refs\/heads\/release\///') >> $GITHUB_OUTPUT
 
+      - name: Setup pnpm
+        uses: ./.github/actions/pnpm
+
       # Create Release PR
       - name: Create Release Pull Request
         uses: changesets/action@v1
