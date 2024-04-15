@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "npx changeset init",
     "add-changelog": "changeset add",
-    "release": "node ./npm_scripts/release.mjs",
+    "create-release-branch": "node ./npm_scripts/create-release-branch.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
