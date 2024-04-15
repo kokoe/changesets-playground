@@ -26,6 +26,6 @@ jobs:
         # https://github.com/changesets/action?tab=readme-ov-file#inputs
         with:
           commit: Release v$version
-          title: Released v$version
+          title: Release v$version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
